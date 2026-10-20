@@ -64,7 +64,8 @@ python src/verificar_catalogo.py
 
 python src/carga_db.py --hasta 2026-09-30
 
-La carga debe realizarse sin la opción --demo. Se espera una confirmación [OK] por serie y ningún [ERROR]
+La carga debe realizarse sin la opción --demo. Se espera una
+confirmación [OK] por serie y ningún [ERROR]
 
 # 3) Verificar la integridad de la base de datos:
 
@@ -74,21 +75,22 @@ python src/verificar_base.py --hasta 2026-09-30
 
 python src/ejecutar_consultas.py
 ```
-**Fecha de corte de los datos: 30 de septiembre de 2026.** La base de datos se genera localmente y no se incluye en el repositorio.
+**Fecha de corte de los datos: 30 de septiembre de 2026.** La base de datos 
+se genera localmente y no se incluye en el repositorio.
 
 
-## 5. Estructura
-
-```
-src/config.py                catálogo de 14 series (código, nombre, frecuencia, unidad, tema) y razón económica de cada una
-src/extraccion.py            descarga desde BCCh y FRED (kit)
-src/carga_db.py              crea el esquema y carga la base SQLite (kit)
-src/verificar_catalogo.py    chequeo del catálogo contra las APIs
-src/verificar_base.py        integridad de la base y detección de modo demo
-src/ejecutar_consultas.py    ejecuta sql/03_consultas_hito2.sql sobre la base
-src/analisis_coyuntura.py    (opcional) gráficos e informe; consume las consultas SQL
-sql/01_esquema.sql           esquema: temas, series, observaciones (con PK y FK) (kit)
-sql/03_consultas_hito2.sql   JOIN, GROUP BY (mensualización) y ventana con PARTITION BY
+## 5. Estructura del proyecto
+* src/config.py: catálogo de 14 series y sus razones económicas.
+* src/extraccion.py: descarga de datos desde las APIs del Banco Central
+  de Chile y FRED.
+* src/carga_db.py: creación y carga de la base SQLite.
+* src/verificar_catalogo.py: comprobación del catálogo contra las APIs.
+* src/verificar_base.py: revisión de la integridad de la base de datos.
+* src/ejecutar_consultas.py: ejecución de las consultas SQL del Hito 2.
+* src/analisis_coyuntura.py: análisis, gráficos e informe opcionales.
+* sql/01_esquema.sql: definición de las tablas temas, series yobservaciones.
+* sql/03_consultas_hito2.sql: consultas con JOIN, GROUP BY y funciones de
+  ventana con PARTITION BY
 ```
 
 ## 6. Base de datos
