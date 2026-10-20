@@ -90,9 +90,8 @@ se genera localmente y no se incluye en el repositorio.
 * src/analisis_coyuntura.py: análisis, gráficos e informe opcionales.
 * sql/01_esquema.sql: definición de las tablas temas, series yobservaciones.
 * sql/03_consultas_hito2.sql: consultas con JOIN, GROUP BY y funciones de
-  ventana con PARTITION BY
-```
-
+  ventana con PARTITION BY.
+  
 ## 6. Base de datos
 
 Tres tablas relacionadas (`sql/01_esquema.sql`): `temas` (clave `id_tema`), `series` (clave `id_serie` = código en la API,
