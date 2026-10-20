@@ -19,8 +19,9 @@ proyección del tipo de cambio frente a un modelo basado solo en su historia? (m
   
 Crear un entorno virtual desde la raíz del repositorio:
 ```bash
-python -m venv.venv
+python -m venv .venv
 ```
+
 Activar el entorno virtual según el sistema operativo:
 - Windows (PowerShell):
 ```powershell
@@ -34,7 +35,8 @@ source .venv/Scripts/activate
  ```bash
 source .venv/bin/activate
 ```
-Instalar las dependencias necesarias:
+
+Instalar las dependencias necesarias
 ```bash
 python -m pip install -r requirements.txt
 ```
@@ -50,25 +52,32 @@ El archivo .env debe mantenerse local y no debe subirse al repositorio.
 
 Utilizar .env.example como plantilla, sin incluir claves reales ni credenciales personales.
 
-## 4. Reproducción (en este orden, desde la raíz del repositorio)
+## 4. Reproducción 
+Ejecutar los siguientes comandos desde la raíz del repositorio y con el entorno virtual activado.
 
 ```bash
-# 1) Verificar el catálogo contra las APIs (existencia, historia, última fecha)
+# 1) Verificar el catálogo de series:
+
 python src/verificar_catalogo.py
 
-# 2) Cargar la base con fecha de corte FIJA y SIN --demo (esperar un [OK] por serie y ningún [ERROR])
+# 2) Cargar la base de datos con fecha de corte fija:
+
 python src/carga_db.py --hasta 2026-09-30
 
-# 3) Verificar la base: tablas con PK/FK, series completas, sin duplicados ni datos demo
+La carga debe realizarse sin la opción --demo. Se espera una confirmación [OK] por serie y ningún [ERROR]
+
+# 3) Verificar la integridad de la base de datos:
+
 python src/verificar_base.py --hasta 2026-09-30
 
-# 4) Ejecutar las consultas SQL sobre la base y ver sus resultados
+# 4) Ejecutar las consultas SQL:
+
 python src/ejecutar_consultas.py
 ```
+**Fecha de corte de los datos: 30 de septiembre de 2026.** La base de datos se genera localmente y no se incluye en el repositorio.
 
-**Fecha de corte de los datos: 2026-09-30.** La base se genera localmente.
 
-5. Estructura
+## 5. Estructura
 
 ```
 src/config.py                catálogo de 14 series (código, nombre, frecuencia, unidad, tema) y razón económica de cada una
