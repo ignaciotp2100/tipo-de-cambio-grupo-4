@@ -14,11 +14,29 @@ proyección del tipo de cambio frente a un modelo basado solo en su historia? (m
 ## 2. Requisitos
 
 * Python 3.10 o superior.
-
+* Git.
+* Credenciales de las API del Banco Central de Chile y FRED.
+  
+Crear un entorno virtual desde la raíz del repositorio:
 ```bash
-python -m venv .venv
-source .venv/bin/activate            # Windows (Git Bash): source .venv/Scripts/activate
-pip install -r requirements.txt
+python -m venv.venv
+```
+Activar el entorno virtual según el sistema operativo:
+- Windows (PowerShell):
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+- Windows (Git Bash):
+```bash
+source .venv/Scripts/activate
+```
+- Linux o macOS:
+ ```bash
+source .venv/bin/activate
+```
+Instalar las dependencias necesarias:
+```bash
+python -m pip install -r requirements.txt
 ```
 
 ## 3. Credenciales
