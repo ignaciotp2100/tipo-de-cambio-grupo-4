@@ -31,7 +31,7 @@ FUENTE = {**{s[0]: "Banco Central de Chile" for s in config.SERIES_BCCH},
           **{s[0]: "FRED (Fed de St. Louis)" for s in config.SERIES_FRED}}
 MAX_REZAGO = 6  # meses
 
-COBRE, TPM, FED = "F019.PPB.PRE.40.D", "F022.TPM.TIN.D001.NO.Z.D", "DFF"
+COBRE, TPM, FED = "F019.PPB.PRE.100.D", "F022.TPM.TIN.D001.NO.Z.D", "DFF"
 DOLAR_GLOBAL, VIX = "DTWEXBGS", "VIXCLS"
 
 

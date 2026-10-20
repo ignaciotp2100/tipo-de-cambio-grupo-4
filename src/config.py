@@ -43,7 +43,7 @@ FRED_API_KEY = os.getenv("FRED_API_KEY", "")
 # ============================================================
 SERIES_BCCH = [
     ("F073.TCO.PRE.Z.D", "Tipo de cambio observado (CLP/USD)", "D", "CLP/USD", 5),                 # VERIFICADO (objetivo)
-    ("F019.PPB.PRE.40.M", "Precio del cobre refinado BML", "M", "cUS$/libra", 5),                 # VERIFICADO
+    ("F019.PPB.PRE.100.D", "Precio del cobre refinado BML", "D", "US$/libra", 5),                 # VERIFICADO
     ("F022.TPM.TIN.D001.NO.Z.D", "Tasa de Política Monetaria (TPM)", "D", "% anual", 4),          # VERIFICADO
     ("F032.IMC.IND.Z.Z.EP18.Z.Z.0.M", "Imacec (índice)", "M", "índice 2018=100", 1),              # VERIFICADO
     ("F074.IPC.VAR.Z.Z.C.M", "IPC, variación mensual", "M", "var. % mensual", 2),                 # VERIFICADO (kit)
@@ -71,7 +71,7 @@ OBJETIVO = "F073.TCO.PRE.Z.D"
 #   "dif"   -> diferencia en 12 meses, en unidades de la serie (tasas -> puntos porcentuales; balanza, que puede ser <= 0)
 #   "nivel" -> la serie ya es una tasa de variación: se usa tal cual
 TRANSFORMACION = {
-    "F073.TCO.PRE.Z.D": "pct", "F019.PPB.PRE.40.M": "pct", "F022.TPM.TIN.D001.NO.Z.D": "dif",
+    "F073.TCO.PRE.Z.D": "pct", "F019.PPB.PRE.100.D": "pct", "F022.TPM.TIN.D001.NO.Z.D": "dif",
     "F032.IMC.IND.Z.Z.EP18.Z.Z.0.M": "pct", "F074.IPC.VAR.Z.Z.C.M": "nivel",
     "F068.B1.FLU.Z.0.C.N.Z.Z.Z.Z.6.0.M": "pct", "F068.B1.VAR.T0.0.S.N.Z.Z.Z.Z.6.0.M": "dif",
     "DFF": "dif", "DGS10": "dif", "DTWEXBGS": "pct", "VIXCLS": "pct", "SP500": "pct",
@@ -81,7 +81,7 @@ TRANSFORMACION = {
 # Razón económica de cada serie (Etapa 1 de la guía) y rezago de publicación aproximado.
 RAZON = {
     "F073.TCO.PRE.Z.D": "Variable a proyectar. Se publica con 1 día hábil de desfase.",
-    "F019.PPB.PRE.40.M": "un mayor precio aumenta los ingresos por exportaciones y puede fortalecer el peso (signo esperado: negativo). Dato del mismo día.",
+    "F019.PPB.PRE.100.D": "un mayor precio aumenta los ingresos por exportaciones y puede fortalecer el peso (signo esperado: negativo). Dato del mismo día.",
     "F022.TPM.TIN.D001.NO.Z.D": "Parte chilena del diferencial de tasas: TPM más alta atrae capital (carry trade) y aprecia el peso (negativo). Calendario de RPM conocido.",
     "F032.IMC.IND.Z.Z.EP18.Z.Z.0.M": "Actividad doméstica: mejores perspectivas atraen inversión (negativo). Rezago de publicación ~35 días: contextualiza, no anticipa en tiempo real.",
     "F074.IPC.VAR.Z.Z.C.M": "Diferencial de inflación con EE.UU. y canal de reacción de la TPM. Rezago ~8 días.",
