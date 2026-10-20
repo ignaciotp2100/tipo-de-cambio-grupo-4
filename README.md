@@ -47,6 +47,7 @@ Cada integrante debe crear su propio archivo .env a partir de .env.example y com
 * FRED: https://fred.stlouisfed.org/docs/api/api\_key.html
   
 El archivo .env debe mantenerse local y no debe subirse al repositorio.
+
 Utilizar .env.example como plantilla, sin incluir claves reales ni credenciales personales.
 
 ## 4. Reproducción (en este orden, desde la raíz del repositorio)
