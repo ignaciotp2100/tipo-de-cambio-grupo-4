@@ -45,6 +45,9 @@ Cada integrante debe crear su propio archivo .env a partir de .env.example y com
 
 * Banco Central de Chile: https://si3.bcentral.cl/Siete/es/Siete/API
 * FRED: https://fred.stlouisfed.org/docs/api/api\_key.html
+  
+El archivo .env debe mantenerse local y no debe subirse al repositorio.
+Utilizar .env.example como plantilla, sin incluir claves reales ni credenciales personales.
 
 ## 4. Reproducción (en este orden, desde la raíz del repositorio)
 
@@ -63,7 +66,6 @@ python src/ejecutar_consultas.py
 ```
 
 **Fecha de corte de los datos: 2026-09-30.** La base se genera localmente.
-
 
 5. Estructura
 
