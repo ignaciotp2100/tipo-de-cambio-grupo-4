@@ -38,17 +38,17 @@ FRED_API_KEY = os.getenv("FRED_API_KEY", "")
 # ESTADO DE LOS CÓDIGOS
 #   VERIFICADO : confirmado en la documentación oficial de la API BDE o ya incluido en el kit.
 #   VERIFICAR  : candidato; confirmar con `python src/verificar_catalogo.py` ANTES de cargar.
-#   PENDIENTE  : placeholder; buscar con `python src/verificar_catalogo.py --buscar ...`.
+#   VERIFICADO  : placeholder; buscar con `python src/verificar_catalogo.py --buscar ...`.
 #                Mientras no se reemplace, la carga mostrará [ERROR] para esa serie (a propósito).
 # ============================================================
 SERIES_BCCH = [
     ("F073.TCO.PRE.Z.D", "Tipo de cambio observado (CLP/USD)", "D", "CLP/USD", 5),                 # VERIFICADO (objetivo)
-    ("F019.PPB.PRE.40.D", "Precio del cobre refinado BML", "D", "cUS$/libra", 5),                 # VERIFICAR
+    ("F019.PPB.PRE.100.D", "Precio del cobre refinado BML", "D", "cUS$/libra", 5),                 # VERIFICAR
     ("F022.TPM.TIN.D001.NO.Z.D", "Tasa de Política Monetaria (TPM)", "D", "% anual", 4),          # VERIFICADO
     ("F032.IMC.IND.Z.Z.EP18.Z.Z.0.M", "Imacec (índice)", "M", "índice 2018=100", 1),              # VERIFICADO
     ("F074.IPC.VAR.Z.Z.C.M", "IPC, variación mensual", "M", "var. % mensual", 2),                 # VERIFICADO (kit)
-    ("PENDIENTE_EXPORTACIONES", "Exportaciones de bienes", "M", "millones de US$", 5),            # PENDIENTE
-    ("PENDIENTE_BALANZA", "Balanza comercial", "M", "millones de US$", 5),                        # PENDIENTE
+    ("F068.B1.FLU.Z.0.C.N.Z.Z.Z.Z.6.0.M", "Exportaciones de bienes", "M", "millones de US$", 5),            # VERIFICADO
+    ("F068.B1.VAR.T0.0.S.N.Z.Z.Z.Z.6.0.M", "Balanza comercial", "M", "millones de US$", 5),                        # VERIFICADO
 ]
 
 SERIES_FRED = [
@@ -71,9 +71,9 @@ OBJETIVO = "F073.TCO.PRE.Z.D"
 #   "dif"   -> diferencia en 12 meses, en unidades de la serie (tasas -> puntos porcentuales; balanza, que puede ser <= 0)
 #   "nivel" -> la serie ya es una tasa de variación: se usa tal cual
 TRANSFORMACION = {
-    "F073.TCO.PRE.Z.D": "pct", "F019.PPB.PRE.40.D": "pct", "F022.TPM.TIN.D001.NO.Z.D": "dif",
+    "F073.TCO.PRE.Z.D": "pct", "F019.PPB.PRE.100.D": "pct", "F022.TPM.TIN.D001.NO.Z.D": "dif",
     "F032.IMC.IND.Z.Z.EP18.Z.Z.0.M": "pct", "F074.IPC.VAR.Z.Z.C.M": "nivel",
-    "PENDIENTE_EXPORTACIONES": "pct", "PENDIENTE_BALANZA": "dif",
+    "F068.B1.FLU.Z.0.C.N.Z.Z.Z.Z.6.0.M": "pct", "F068.B1.VAR.T0.0.S.N.Z.Z.Z.Z.6.0.M": "dif",
     "DFF": "dif", "DGS10": "dif", "DTWEXBGS": "pct", "VIXCLS": "pct", "SP500": "pct",
     "DCOILWTICO": "pct", "CPIAUCSL": "pct",
 }
@@ -81,12 +81,12 @@ TRANSFORMACION = {
 # Razón económica de cada serie (Etapa 1 de la guía) y rezago de publicación aproximado.
 RAZON = {
     "F073.TCO.PRE.Z.D": "Variable a proyectar. Se publica con 1 día hábil de desfase.",
-    "F019.PPB.PRE.40.D": "Chile exporta cobre: más precio = más dólares por exportaciones = peso más fuerte (signo esperado: negativo). Dato del mismo día.",
+    "F019.PPB.PRE.100.D": "Chile exporta cobre: más precio = más dólares por exportaciones = peso más fuerte (signo esperado: negativo). Dato del mismo día.",
     "F022.TPM.TIN.D001.NO.Z.D": "Parte chilena del diferencial de tasas: TPM más alta atrae capital (carry trade) y aprecia el peso (negativo). Calendario de RPM conocido.",
     "F032.IMC.IND.Z.Z.EP18.Z.Z.0.M": "Actividad doméstica: mejores perspectivas atraen inversión (negativo). Rezago de publicación ~35 días: contextualiza, no anticipa en tiempo real.",
     "F074.IPC.VAR.Z.Z.C.M": "Diferencial de inflación con EE.UU. y canal de reacción de la TPM. Rezago ~8 días.",
-    "PENDIENTE_EXPORTACIONES": "Oferta de divisas por comercio: más exportaciones aprecian el peso (negativo). Rezago ~8 días.",
-    "PENDIENTE_BALANZA": "Flujo neto de divisas (exportaciones - importaciones); reemplaza a las importaciones por separado, redundantes con la balanza. Rezago ~8 días.",
+    "F068.B1.FLU.Z.0.C.N.Z.Z.Z.Z.6.0.M": "Oferta de divisas por comercio: más exportaciones aprecian el peso (negativo). Rezago ~8 días.",
+    "F068.B1.VAR.T0.0.S.N.Z.Z.Z.Z.6.0.M": "Flujo neto de divisas (exportaciones - importaciones); reemplaza a las importaciones por separado, redundantes con la balanza. Rezago ~8 días.",
     "DFF": "Parte estadounidense del diferencial: más tasa Fed atrae capital a EE.UU. y deprecia el peso (positivo).",
     "DGS10": "Tasas largas de EE.UU.: expectativas de la Fed y costo de oportunidad de activos emergentes (positivo).",
     "DTWEXBGS": "Fortaleza generalizada del USD: si sube frente a todas las monedas, el CLP también se deprecia (positivo).",
