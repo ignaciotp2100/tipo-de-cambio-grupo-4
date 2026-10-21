@@ -53,30 +53,40 @@ El archivo .env debe mantenerse local y no debe subirse al repositorio.
 Utilizar .env.example como plantilla, sin incluir claves reales ni credenciales personales.
 
 ## 4. Reproducción 
-Ejecutar los siguientes comandos desde la raíz del repositorio y con el entorno virtual activado.
+Ejecutar los siguientes comandos desde la raíz del repositorio, con el entorno virtual activado.
 
 ```bash
 # 1) Verificar el catálogo de series:
 
 python src/verificar_catalogo.py
 
-# 2) Cargar la base de datos con fecha de corte fija:
+# 2) Cargar la base de datos:
+La carga utiliza como fecha de corte el día de ejecución si no se especifica
+--hasta. Para reproducir una carga con una fecha determinada, se debe indicar
+explícitamente.
 
-python src/carga_db.py --hasta 2026-09-30
+python src/carga_db.py
+
+Para utilizar una fecha de corte específica:
+
+python src/carga_db.py --hasta AAAA-MM-DD
 
 La carga debe realizarse sin la opción --demo. Se espera una
 confirmación [OK] por serie y ningún [ERROR]
 
 # 3) Verificar la integridad de la base de datos:
 
-python src/verificar_base.py --hasta 2026-09-30
+python src/verificar_base.py
+
+Para verificar la base hasta una fecha específica:
+
+python src/verificar_base.py --hasta AAAA-MM-DD
 
 # 4) Ejecutar las consultas SQL:
 
 python src/ejecutar_consultas.py
 ```
-**Fecha de corte de los datos: 30 de septiembre de 2026.** La base de datos 
-se genera localmente y no se incluye en el repositorio.
+**La fecha de corte corresponde al día de ejecución de la carga, salvo que se indique lo contrario mediante --hasta. La base de datos se genera localmente y no se incluye en el repositorio**
 
 
 ## 5. Estructura del proyecto
