@@ -55,37 +55,43 @@ Utilizar .env.example como plantilla, sin incluir claves reales ni credenciales 
 ## 4. Reproducción 
 Ejecutar los siguientes comandos desde la raíz del repositorio, con el entorno virtual activado.
 
-```bash
 # 1) Verificar el catálogo de series:
-
+```bash
 python src/verificar_catalogo.py
+```
 
 # 2) Cargar la base de datos:
+
 La carga utiliza como fecha de corte el día de ejecución si no se especifica
 --hasta. Para reproducir una carga con una fecha determinada, se debe indicar
 explícitamente.
-
+```bash
 python src/carga_db.py
+```
 
 Para utilizar una fecha de corte específica:
-
+```bash
 python src/carga_db.py --hasta AAAA-MM-DD
+```
 
 La carga debe realizarse sin la opción --demo. Se espera una
 confirmación [OK] por serie y ningún [ERROR]
 
 # 3) Verificar la integridad de la base de datos:
-
+```bash
 python src/verificar_base.py
+```
 
 Para verificar la base hasta una fecha específica:
-
+```bash
 python src/verificar_base.py --hasta AAAA-MM-DD
+```
 
 # 4) Ejecutar las consultas SQL:
-
+```bash
 python src/ejecutar_consultas.py
 ```
+
 **La fecha de corte corresponde al día de ejecución de la carga, salvo que se indique lo contrario mediante --hasta. La base de datos se genera localmente y no se incluye en el repositorio**
 
 
